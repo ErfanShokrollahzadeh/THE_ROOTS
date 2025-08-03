@@ -60,14 +60,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
   filterButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      // Remove active class from all buttons
-      filterButtons.forEach((btn) => btn.classList.remove("active"));
-      // Add active class to clicked button
+      // Remove active class and aria-pressed from all buttons
+      filterButtons.forEach((btn) => {
+        btn.classList.remove("active");
+        btn.setAttribute("aria-pressed", "false");
+      });
+
+      // Add active class and aria-pressed to clicked button
       button.classList.add("active");
+      button.setAttribute("aria-pressed", "true");
 
       const category = button.dataset.category;
 
-      menuSectionsForFilter.forEach((section) => {
+      // Add loading state
+      button.style.pointerEvents = "none";
+
+      menuSectionsForFilter.forEach((section, index) => {
         if (category === "all" || section.dataset.category === category) {
           section.style.display = "block";
           section.style.opacity = "0";
@@ -76,11 +84,29 @@ document.addEventListener("DOMContentLoaded", function () {
           setTimeout(() => {
             section.style.opacity = "1";
             section.style.transform = "translateY(0)";
-          }, 100);
+          }, 100 + index * 50); // Staggered animation
         } else {
-          section.style.display = "none";
+          section.style.opacity = "0";
+          section.style.transform = "translateY(-20px)";
+
+          setTimeout(() => {
+            section.style.display = "none";
+          }, 300);
         }
       });
+
+      // Remove loading state
+      setTimeout(() => {
+        button.style.pointerEvents = "auto";
+      }, 500);
+    });
+
+    // Add keyboard support
+    button.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        button.click();
+      }
     });
   });
 

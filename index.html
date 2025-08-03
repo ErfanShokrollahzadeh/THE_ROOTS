@@ -40,25 +40,63 @@
       </header>
 
       <!-- Category Filter -->
-      <div class="category-filter">
-        <button class="filter-btn active" data-category="all">Tümü</button>
-        <button class="filter-btn" data-category="cheesecakes">
-          San Sebastian
+      <nav class="category-filter" aria-label="Menu Categories">
+        <button
+          class="filter-btn active"
+          data-category="all"
+          aria-pressed="true"
+        >
+          <span>Tümü</span>
         </button>
-        <button class="filter-btn" data-category="toasts">Tostlar</button>
-        <button class="filter-btn" data-category="desserts">Tatlılar</button>
-        <button class="filter-btn" data-category="sandwiches">
-          Sandviçler
+        <button
+          class="filter-btn"
+          data-category="cheesecakes"
+          aria-pressed="false"
+        >
+          <span>San Sebastian</span>
         </button>
-        <button class="filter-btn" data-category="hot-drinks">
-          Sıcak İçecek
+        <button class="filter-btn" data-category="toasts" aria-pressed="false">
+          <span>Tostlar</span>
         </button>
-        <button class="filter-btn" data-category="cold-drinks">
-          Soğuk İçecek
+        <button
+          class="filter-btn"
+          data-category="desserts"
+          aria-pressed="false"
+        >
+          <span>Tatlılar</span>
         </button>
-        <button class="filter-btn" data-category="breakfast">Kahvaltı</button>
-        <button class="filter-btn" data-category="soups">Çorbalar</button>
-      </div>
+        <button
+          class="filter-btn"
+          data-category="sandwiches"
+          aria-pressed="false"
+        >
+          <span>Sandviçler</span>
+        </button>
+        <button
+          class="filter-btn"
+          data-category="hot-drinks"
+          aria-pressed="false"
+        >
+          <span>Sıcak İçecek</span>
+        </button>
+        <button
+          class="filter-btn"
+          data-category="cold-drinks"
+          aria-pressed="false"
+        >
+          <span>Soğuk İçecek</span>
+        </button>
+        <button
+          class="filter-btn"
+          data-category="breakfast"
+          aria-pressed="false"
+        >
+          <span>Kahvaltı</span>
+        </button>
+        <button class="filter-btn" data-category="soups" aria-pressed="false">
+          <span>Çorbalar</span>
+        </button>
+      </nav>
 
       <!-- Menu Grid -->
       <div class="menu-grid">
@@ -216,7 +254,7 @@
             <div class="menu-item">
               <div class="item-image">
                 <img
-                  src="https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=300&h=200&fit=crop&auto=format"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2zuG9aIFdvxeFLE1rXxL_TWlZBF0jwa7X83sG5HrZj1j1Cm_jZ6LT8HuBdD_JCjCgeQc&usqp=CAU"
                   alt="Karışık Tost"
                   loading="lazy"
                 />
@@ -230,7 +268,7 @@
             <div class="menu-item special">
               <div class="item-image">
                 <img
-                  src="https://images.unsplash.com/photo-1509722747041-616f39b57569?w=300&h=200&fit=crop&auto=format"
+                  src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=300&h=200&fit=crop&auto=format"
                   alt="The Roots Tost"
                   loading="lazy"
                 />

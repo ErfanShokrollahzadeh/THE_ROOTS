@@ -10,7 +10,185 @@ body {
   background: linear-gradient(135deg, #f5f1eb 0%, #ede4d4 100%);
   color: #2d2d2d;
   line-height: 1.6;
-  overflow-x: hidden;
+  overf  border-radius: 2px;
+}
+
+/* Category Filter */
+.category-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin: 40px 0 50px 0;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(15px);
+  border-radius: 25px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  animation: filterFadeIn 0.8s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@keyframes filterFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.filter-btn {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border: 2px solid transparent;
+  border-radius: 50px;
+  padding: 12px 24px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #495057;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  min-width: 120px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  outline: none;
+  animation: buttonSlideIn 0.6s ease-out forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.filter-btn:nth-child(1) { animation-delay: 0.1s; }
+.filter-btn:nth-child(2) { animation-delay: 0.2s; }
+.filter-btn:nth-child(3) { animation-delay: 0.3s; }
+.filter-btn:nth-child(4) { animation-delay: 0.4s; }
+.filter-btn:nth-child(5) { animation-delay: 0.5s; }
+.filter-btn:nth-child(6) { animation-delay: 0.6s; }
+.filter-btn:nth-child(7) { animation-delay: 0.7s; }
+.filter-btn:nth-child(8) { animation-delay: 0.8s; }
+.filter-btn:nth-child(9) { animation-delay: 0.9s; }
+
+@keyframes buttonSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.filter-btn span {
+  position: relative;
+  z-index: 2;
+  transition: color 0.3s ease;
+}
+
+.filter-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.5s ease;
+  z-index: 1;
+}
+
+.filter-btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.3) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.filter-btn:hover::before {
+  left: 100%;
+}
+
+.filter-btn:hover::after {
+  width: 300px;
+  height: 300px;
+}
+
+.filter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+  border-color: rgba(212, 175, 55, 0.3);
+  background: linear-gradient(135deg, #fff8e1 0%, #f5e8a8 100%);
+}
+
+.filter-btn:focus {
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3), 0 8px 25px rgba(212, 175, 55, 0.2);
+}
+
+.filter-btn.active {
+  background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+  color: #fff;
+  border-color: #d4af37;
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+  transform: translateY(-1px);
+}
+
+.filter-btn.active::after {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+}
+
+.filter-btn.active:hover {
+  background: linear-gradient(135deg, #c19b26 0%, #e8c547 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.5);
+}
+
+.filter-btn:active {
+  transform: translateY(0);
+  transition: transform 0.1s ease;
+}
+
+/* Responsive category filter */
+@media (max-width: 768px) {
+  .category-filter {
+    gap: 8px;
+    padding: 15px;
+    margin: 30px 0 40px 0;
+  }
+  
+  .filter-btn {
+    min-width: 100px;
+    padding: 10px 18px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .category-filter {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .filter-btn {
+    min-width: 200px;
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+.menu-section {w-x: hidden;
 }
 
 .container {

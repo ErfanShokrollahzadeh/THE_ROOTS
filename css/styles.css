@@ -235,41 +235,181 @@ body::before {
   }
 }
 
+/* Navigation Bar */
+.navbar {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 0 0 25px 25px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  margin-bottom: 30px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.nav-links {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #5d4e37;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 12px 25px;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-link:hover {
+  background: linear-gradient(135deg, #8b7355 0%, #6d5635 100%);
+  color: #f5f1eb;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(139, 115, 85, 0.3);
+}
+
+.nav-link.active {
+  background: linear-gradient(135deg, #8b7355 0%, #6d5635 100%);
+  color: #f5f1eb;
+  box-shadow: 0 5px 15px rgba(139, 115, 85, 0.4);
+}
+
+.nav-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.nav-link:hover::before {
+  left: 100%;
+}
+
 /* Header Styles */
 .header {
   text-align: center;
   margin-bottom: 50px;
   position: relative;
+  padding: 40px 20px;
+}
+
+.header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .logo-section {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 60px;
-  flex-wrap: wrap;
-  margin-bottom: 30px;
-}
-
-.logo {
-  position: relative;
 }
 
 .logo-circle {
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
-  background: linear-gradient(145deg, #4a3f35, #5d524a);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
+    inset 0 5px 15px rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  animation: logoGlow 3s ease-in-out infinite alternate;
+}
+
+.logo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+/* Brand Section */
+.brand-section {
+  text-align: left;
+  max-width: 400px;
+}
+
+.brand-title {
+  font-family: "Playfair Display", serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #5d4e37;
+  margin-bottom: 15px;
+  letter-spacing: 3px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #8b7355 0%, #5d4e37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.brand-slogan {
+  font-family: "Lato", sans-serif;
+  font-size: 1.3rem;
+  color: #6d5635;
+  font-style: italic;
+  margin-bottom: 20px;
+  line-height: 1.4;
+  opacity: 0.9;
+}
+
+.brand-subtitle {
+  background: linear-gradient(135deg, #8b7355 0%, #6d5635 100%);
+  color: #f5f1eb;
+  padding: 12px 20px;
+  border-radius: 25px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  box-shadow: 0 8px 20px rgba(139, 115, 85, 0.3);
+  display: inline-block;
+  transform: perspective(500px) rotateX(5deg);
+  transition: all 0.3s ease;
+}
+
+.brand-subtitle:hover {
+  transform: perspective(500px) rotateX(0deg) translateY(-2px);
+  box-shadow: 0 12px 25px rgba(139, 115, 85, 0.4);
+}
+
+.logo-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   color: #f5f1eb;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
-    inset 0 5px 15px rgba(255, 255, 255, 0.1);
-  position: relative;
-  transition: all 0.3s ease;
-  animation: logoGlow 3s ease-in-out infinite alternate;
+  transition: background-color 0.3s ease;
 }
 
 @keyframes logoGlow {
@@ -284,69 +424,11 @@ body::before {
 }
 
 .logo-circle:hover {
-  transform: scale(1.05) rotateY(5deg);
+  transform: scale(1.05);
 }
 
-.logo h1 {
-  font-family: "Playfair Display", serif;
-  font-size: 2.2rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-align: center;
-  line-height: 1.1;
-  margin-bottom: 8px;
-}
-
-.root-icon {
-  font-size: 1.5rem;
-  opacity: 0.8;
-  animation: rootGrow 2s ease-in-out infinite alternate;
-}
-
-@keyframes rootGrow {
-  0% {
-    transform: scale(1) rotate(-2deg);
-  }
-  100% {
-    transform: scale(1.1) rotate(2deg);
-  }
-}
-
-.qr-section {
-  text-align: center;
-  font-size: 0.95rem;
-  color: #666;
-  max-width: 200px;
-}
-
-.qr-section p {
-  margin-bottom: 15px;
-  font-style: italic;
-}
-
-.qr-placeholder {
-  background: #fff;
-  padding: 15px;
-  border-radius: 12px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-}
-
-.qr-placeholder:hover {
-  transform: translateY(-3px);
-}
-
-.qr-code {
-  width: 100px;
-  height: 100px;
-  background: linear-gradient(45deg, #333 25%, transparent 25%),
-    linear-gradient(-45deg, #333 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, #333 75%),
-    linear-gradient(-45deg, transparent 75%, #333 75%);
-  background-size: 8px 8px;
-  background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
-  margin: 0 auto 10px;
-  border-radius: 6px;
+.logo-circle:hover .logo-image {
+  transform: scale(1.1);
 }
 
 /* Menu Grid */
@@ -639,18 +721,39 @@ body::before {
     padding: 15px;
   }
 
-  .logo-section {
+  .nav-links {
+    gap: 20px;
+  }
+
+  .nav-link {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+
+  .header-container {
     flex-direction: column;
-    gap: 30px;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .brand-section {
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .brand-title {
+    font-size: 2.8rem;
+    margin-bottom: 12px;
+  }
+
+  .brand-slogan {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
   }
 
   .logo-circle {
     width: 150px;
     height: 150px;
-  }
-
-  .logo h1 {
-    font-size: 1.8rem;
   }
 
   .menu-grid {
@@ -681,6 +784,45 @@ body::before {
 }
 
 @media (max-width: 480px) {
+  .nav-container {
+    padding: 12px 20px;
+  }
+
+  .nav-links {
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .nav-link {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+
+  .header-container {
+    gap: 30px;
+    padding: 20px 15px;
+  }
+
+  .brand-title {
+    font-size: 2.2rem;
+    letter-spacing: 2px;
+  }
+
+  .brand-slogan {
+    font-size: 1rem;
+  }
+
+  .brand-subtitle {
+    font-size: 0.85rem;
+    padding: 10px 16px;
+  }
+
+  .logo-circle {
+    width: 120px;
+    height: 120px;
+  }
+
   .menu-item {
     flex-direction: column;
     align-items: flex-start;

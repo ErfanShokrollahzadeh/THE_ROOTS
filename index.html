@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Roots Cafe - Digital Menu</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap"
       rel="stylesheet"
@@ -16,24 +16,34 @@
   </head>
   <body>
     <div class="container">
+      <!-- Navigation Bar -->
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-links">
+            <a href="#home" class="nav-link active">Home</a>
+            <a href="#gallery" class="nav-link">Gallery</a>
+            <a href="#about" class="nav-link">About Us</a>
+          </div>
+        </div>
+      </nav>
+
       <!-- Header -->
       <header class="header">
-        <div class="logo-section">
-          <div class="logo">
+        <div class="header-container">
+          <div class="logo-section">
             <div class="logo-circle">
-              <h1>THE<br />ROOTS</h1>
-              <div class="root-icon">
-                <i class="fas fa-seedling"></i>
-              </div>
+              <img
+                src="images/logo.jpg"
+                alt="The Roots Cafe Logo"
+                class="logo-image"
+              />
             </div>
           </div>
-          <div class="qr-section">
-            <p>
-              QR Kodu okutarak<br />instagram<br />sayfamıza gidebilirsiniz.
-            </p>
-            <div class="qr-placeholder">
-              <div class="qr-code"></div>
-              <p>@THEROOTS_CAFE</p>
+          <div class="brand-section">
+            <h1 class="brand-title">THE ROOTS</h1>
+            <p class="brand-slogan">Where Every Flavor Tells a Story</p>
+            <div class="brand-subtitle">
+              <span>Premium Coffee & Fresh Delights</span>
             </div>
           </div>
         </div>
@@ -1013,7 +1023,7 @@
             <p><i class="fas fa-clock"></i> Hours: 08:00 - 22:00</p>
           </div>
           <div class="social-media">
-            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.instagram.com/theroots_cafe/" class="social-link"><i class="fab fa-instagram"></i></a>
             <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
             <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
           </div>

@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Roots Cafe - Digital Menu</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <div class="logo-section">
+          <div class="logo">
+            <div class="logo-circle">
+              <h1>THE<br />ROOTS</h1>
+              <div class="root-icon">
+                <i class="fas fa-seedling"></i>
+              </div>
+            </div>
+          </div>
+          <div class="qr-section">
+            <p>
+              QR Kodu okutarak<br />instagram<br />sayfamıza gidebilirsiniz.
+            </p>
+            <div class="qr-placeholder">
+              <div class="qr-code"></div>
+              <p>@THEROOTS_CAFE</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Category Filter -->
+      <div class="category-filter">
+        <button class="filter-btn active" data-category="all">Tümü</button>
+        <button class="filter-btn" data-category="cheesecakes">
+          San Sebastian
+        </button>
+        <button class="filter-btn" data-category="toasts">Tostlar</button>
+        <button class="filter-btn" data-category="desserts">Tatlılar</button>
+        <button class="filter-btn" data-category="sandwiches">
+          Sandviçler
+        </button>
+        <button class="filter-btn" data-category="hot-drinks">
+          Sıcak İçecek
+        </button>
+        <button class="filter-btn" data-category="cold-drinks">
+          Soğuk İçecek
+        </button>
+        <button class="filter-btn" data-category="breakfast">Kahvaltı</button>
+        <button class="filter-btn" data-category="soups">Çorbalar</button>
+      </div>
+
+      <!-- Menu Grid -->
+      <div class="menu-grid">
+        <!-- San Sebastian Cheesecakes -->
+        <section class="menu-section" data-category="cheesecakes">
+          <h2>SAN SEBASTIAN CHEESECAKES</h2>
+          <div class="menu-items">
+            <div class="menu-item">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=300&h=200&fit=crop&auto=format"
+                  alt="Klasik San Sebastian"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">KLASİK SAN SEBASTİAN</span>
+                <span class="dots"></span>
+                <span class="price">195 <small>TRY</small></span>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=300&h=200&fit=crop&auto=format"
+                  alt="Çikolatalı San Sebastian"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">ÇİKOLATALI SAN SEBASTİAN</span>
+                <span class="dots"></span>
+                <span class="price">195 <small>TRY</small></span>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=300&h=200&fit=crop&auto=format"
+                  alt="Çikolata Portakallı San Sebastian"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">ÇİKOLATA PORTAKALLI SAN SEBASTİAN</span>
+                <span class="dots"></span>
+                <span class="price">195 <small>TRY</small></span>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=300&h=200&fit=crop&auto=format"
+                  alt="Süt Reçelli San Sebastian"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">SÜT REÇELLİ SAN SEBASTİAN</span>
+                <span class="dots"></span>
+                <span class="price">195 <small>TRY</small></span>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1506459225024-1428097a7e18?w=300&h=200&fit=crop&auto=format"
+                  alt="Tuzlu Karamelli San Sebastian"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">TUZLU KARAMELLI SAN SEBASTİAN</span>
+                <span class="dots"></span>
+                <span class="price">195 <small>TRY</small></span>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=300&h=200&fit=crop&auto=format"
+                  alt="Orman Meyveli San Sebastian"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">ORMAN MEYVELİ SAN SEBASTİAN</span>
+                <span class="dots"></span>
+                <span class="price">195 <small>TRY</small></span>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?w=300&h=200&fit=crop&auto=format"
+                  alt="Antep Fıstıklı San Sebastian"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">ANTEP FİSTIKLI SAN SEBASTİAN</span>
+                <span class="dots"></span>
+                <span class="price">195 <small>TRY</small></span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Toasts -->
+        <section class="menu-section" data-category="toasts">
+          <h2>TOASTS</h2>
+          <div class="menu-items">
+            <div class="menu-item">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1528736235302-52922df5c122?w=300&h=200&fit=crop&auto=format"
+                  alt="Beyaz Peynir Domates Tost"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">BEYAZ PEYNİR, DOMATES</span>
+                <span class="dots"></span>
+                <span class="price">170 <small>TRY</small></span>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1619096252214-ef06c45683e3?w=300&h=200&fit=crop&auto=format"
+                  alt="Kaşar Tost"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">KAŞAR</span>
+                <span class="dots"></span>
+                <span class="price">170 <small>TRY</small></span>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=300&h=200&fit=crop&auto=format"
+                  alt="Sucuklu Tost"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">SUCUK</span>
+                <span class="dots"></span>
+                <span class="price">170 <small>TRY</small></span>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=300&h=200&fit=crop&auto=format"
+                  alt="Karışık Tost"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">KARIŞIK</span>
+                <span class="dots"></span>
+                <span class="price">195 <small>TRY</small></span>
+              </div>
+            </div>
+            <div class="menu-item special">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1509722747041-616f39b57569?w=300&h=200&fit=crop&auto=format"
+                  alt="The Roots Tost"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">THE ROOTS TOST</span>
+                <span class="dots"></span>
+                <span class="price">210 <small>TRY</small></span>
+                <small class="description"
+                  >( ÖZELİ BAĞLAMA CANIM VE SOSLAR VE KARALI, SUCUK )</small
+                >
+              </div>
+            </div>
+            <div class="menu-item special">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=300&h=200&fit=crop&auto=format"
+                  alt="The Roots Black&White"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">THE ROOTS BLACK&WHITE</span>
+                <span class="dots"></span>
+                <span class="price">210 <small>TRY</small></span>
+                <small class="description"
+                  >( ÖZELİ BAĞLAMA CANIM, DOMATES,ZEYTİN EZMESİ & PEYNİR
+                  )</small
+                >
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Desserts -->
+        <section class="menu-section" data-category="desserts">
+          <h2>DESSERTS</h2>
+          <div class="menu-items">
+            <div class="menu-item">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=300&h=200&fit=crop&auto=format"
+                  alt="Tiramisu"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">TİRAMİSU</span>
+                <span class="dots"></span>
+                <span class="price">195 <small>TRY</small></span>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=300&h=200&fit=crop&auto=format"
+                  alt="Havuçlu Tarçınlı Kek"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">HAVUÇLU TARÇINLI KEK</span>
+                <span class="dots"></span>
+                <span class="price">150 <small>TRY</small></span>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=300&h=200&fit=crop&auto=format"
+                  alt="Cookie"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">COOKİE</span>
+                <span class="dots"></span>
+                <span class="price">125 <small>TRY</small></span>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=300&h=200&fit=crop&auto=format"
+                  alt="Muffin"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">MUFFİN</span>
+                <span class="dots"></span>
+                <span class="price">125 <small>TRY</small></span>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=300&h=200&fit=crop&auto=format"
+                  alt="Nata"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">NATA ( 2 ADET )</span>
+                <span class="dots"></span>
+                <span class="price">150 <small>TRY</small></span>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=300&h=200&fit=crop&auto=format"
+                  alt="Magnolia"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">MAGNOLİA ( 4ADT )</span>
+                <span class="dots"></span>
+                <span class="price">195 <small>TRY</small></span>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=300&h=200&fit=crop&auto=format"
+                  alt="Brownie Beyaz Çikolatalı"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">BROWNİE BEYAZ ÇİKOLATALI</span>
+                <span class="dots"></span>
+                <span class="price">195 <small>TRY</small></span>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=300&h=200&fit=crop&auto=format"
+                  alt="Extra Dondurma"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">EXTRA DONDURMA</span>
+                <span class="dots"></span>
+                <span class="price">50 <small>TRY</small></span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Sandwiches -->
+        <section class="menu-section" data-category="sandwiches">
+          <h2>SANDWICHES</h2>
+          <div class="menu-items">
+            <div class="menu-item">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1553979459-d2229ba7433a?w=300&h=200&fit=crop&auto=format"
+                  alt="Akdeniz Sandviç"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">AKDENİZ</span>
+                <span class="dots"></span>
+                <span class="price">210 <small>TRY</small></span>
+                <small class="description"
+                  >( ÇİTİR GALA SOĞUK DOMATES,ROKA ZEYTİN, VERDİN YEŞİLLİKLERİ
+                  )</small
+                >
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=300&h=200&fit=crop&auto=format"
+                  alt="Hindi Füme"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">HİNDİ FÜME</span>
+                <span class="dots"></span>
+                <span class="price">225 <small>TRY</small></span>
+                <small class="description"
+                  >( HİNDİ FÜME, KAŞAR, DOMATES MARİL, HARDAL SOS, VERDİN
+                  YEŞİLLİKLERİ )</small
+                >
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Hot Beverages -->
+        <section class="menu-section" data-category="hot-drinks">
+          <h2>SICAK İÇECEKLER</h2>
+          <div class="menu-items">
+            <div class="menu-item">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1510707577719-ae7c14805e76?w=300&h=200&fit=crop&auto=format"
+                  alt="Espresso"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">ESPRESSO</span>
+                <span class="dots"></span>
+                <span class="price">45 <small>TRY</small></span>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=200&fit=crop&auto=format"
+                  alt="Double Espresso"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">DOUBLE ESPRESSO</span>
+                <span class="dots"></span>
+                <span class="price">60 <small>TRY</small></span>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1497636577773-f1231844b336?w=300&h=200&fit=crop&auto=format"
+                  alt="Americano"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">AMERİKANO</span>
+                <span class="dots"></span>
+                <span class="price">55 <small>TRY</small></span>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1534778101976-62847782c213?w=300&h=200&fit=crop&auto=format"
+                  alt="Cappuccino"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">CAPPUCCINO</span>
+                <span class="dots"></span>
+                <span class="price">65 <small>TRY</small></span>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1561882468-9110e03e0f78?w=300&h=200&fit=crop&auto=format"
+                  alt="Latte"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">LATTE</span>
+                <span class="dots"></span>
+                <span class="price">65 <small>TRY</small></span>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=300&h=200&fit=crop&auto=format"
+                  alt="Flat White"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">FLAT WHITE</span>
+                <span class="dots"></span>
+                <span class="price">70 <small>TRY</small></span>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1578928675648-7521e4d2e6b2?w=300&h=200&fit=crop&auto=format"
+                  alt="Mocha"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">MOCHA</span>
+                <span class="dots"></span>
+                <span class="price">75 <small>TRY</small></span>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1485808191679-5f86510681a2?w=300&h=200&fit=crop&auto=format"
+                  alt="Caramel Macchiato"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">CARAMEL MACCHIATO</span>
+                <span class="dots"></span>
+                <span class="price">80 <small>TRY</small></span>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=300&h=200&fit=crop&auto=format"
+                  alt="Turkish Coffee"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">TURKISH COFFEE</span>
+                <span class="dots"></span>
+                <span class="price">50 <small>TRY</small></span>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=300&h=200&fit=crop&auto=format"
+                  alt="Çay"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">ÇAY</span>
+                <span class="dots"></span>
+                <span class="price">25 <small>TRY</small></span>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1597318101267-1797cc4f97d5?w=300&h=200&fit=crop&auto=format"
+                  alt="Bitki Çayı"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">BITKI ÇAYI</span>
+                <span class="dots"></span>
+                <span class="price">30 <small>TRY</small></span>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="item-image">
+                <img
+                  src="https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=300&h=200&fit=crop&auto=format"
+                  alt="Sıcak Çikolata"
+                  loading="lazy"
+                />
+              </div>
+              <div class="item-content">
+                <span class="item-name">SICAK ÇİKOLATA</span>
+                <span class="dots"></span>
+                <span class="price">60 <small>TRY</small></span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Cold Beverages -->
+        <section class="menu-section">
+          <h2>SOĞUK İÇECEKLER</h2>
+          <div class="menu-items">
+            <div class="menu-item">
+              <span class="item-name">ICED COFFEE</span>
+              <span class="dots"></span>
+              <span class="price">60 <small>TRY</small></span>
+            </div>
+            <div class="menu-item">
+              <span class="item-name">ICED LATTE</span>
+              <span class="dots"></span>
+              <span class="price">70 <small>TRY</small></span>
+            </div>
+            <div class="menu-item">
+              <span class="item-name">ICED AMERICANO</span>
+              <span class="dots"></span>
+              <span class="price">60 <small>TRY</small></span>
+            </div>
+            <div class="menu-item">
+              <span class="item-name">COLD BREW</span>
+              <span class="dots"></span>
+              <span class="price">65 <small>TRY</small></span>
+            </div>
+            <div class="menu-item">
+              <span class="item-name">FRAPPUCCINO</span>
+              <span class="dots"></span>
+              <span class="price">80 <small>TRY</small></span>
+            </div>
+            <div class="menu-item">
+              <span class="item-name">ICED CHOCOLATE</span>
+              <span class="dots"></span>
+              <span class="price">65 <small>TRY</small></span>
+            </div>
+            <div class="menu-item">
+              <span class="item-name">SMOOTHIE</span>
+              <span class="dots"></span>
+              <span class="price">75 <small>TRY</small></span>
+            </div>
+            <div class="menu-item">
+              <span class="item-name">FRESH ORANGE JUICE</span>
+              <span class="dots"></span>
+              <span class="price">55 <small>TRY</small></span>
+            </div>
+            <div class="menu-item">
+              <span class="item-name">LEMONADE</span>
+              <span class="dots"></span>
+              <span class="price">45 <small>TRY</small></span>
+            </div>
+            <div class="menu-item">
+              <span class="item-name">AYRAN</span>
+              <span class="dots"></span>
+              <span class="price">25 <small>TRY</small></span>
+            </div>
+            <div class="menu-item">
+              <span class="item-name">MINERAL WATER</span>
+              <span class="dots"></span>
+              <span class="price">15 <small>TRY</small></span>
+            </div>
+            <div class="menu-item">
+              <span class="item-name">SOFT DRINKS</span>
+              <span class="dots"></span>
+              <span class="price">35 <small>TRY</small></span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Breakfast Items -->
+        <section class="menu-section">
+          <h2>KAHVALTI</h2>
+          <div class="menu-items">
+            <div class="menu-item special">
+              <span class="item-name">THE ROOTS KAHVALTI</span>
+              <span class="dots"></span>
+              <span class="price">350 <small>TRY</small></span>
+              <small class="description"
+                >( 2 KİŞİLİK ÖZEL KAHVALTI TABAĞIMIZ )</small
+              >
+            </div>
+            <div class="menu-item">
+              <span class="item-name">SERPME KAHVALTI</span>
+              <span class="dots"></span>
+              <span class="price">250 <small>TRY</small></span>
+            </div>
+            <div class="menu-item">
+              <span class="item-name">SAHANDA YUMURTA</span>
+              <span class="dots"></span>
+              <span class="price">45 <small>TRY</small></span>
+            </div>
+            <div class="menu-item">
+              <span class="item-name">ÇIRPILMIŞ YUMURTA</span>
+              <span class="dots"></span>
+              <span class="price">50 <small>TRY</small></span>
+            </div>
+            <div class="menu-item">
+              <span class="item-name">OMELET</span>
+              <span class="dots"></span>
+              <span class="price">60 <small>TRY</small></span>
+            </div>
+            <div class="menu-item">
+              <span class="item-name">MENEMENİ</span>
+              <span class="dots"></span>
+              <span class="price">65 <small>TRY</small></span>
+            </div>
+            <div class="menu-item">
+              <span class="item-name">SUCUKLU YUMURTA</span>
+              <span class="dots"></span>
+              <span class="price">70 <small>TRY</small></span>
+            </div>
+            <div class="menu-item">
+              <span class="item-name">PANCAKE</span>
+              <span class="dots"></span>
+              <span class="price">85 <small>TRY</small></span>
+            </div>
+            <div class="menu-item">
+              <span class="item-name">WAFFLE</span>
+              <span class="dots"></span>
+              <span class="price">90 <small>TRY</small></span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Soups -->
+        <section class="menu-section">
+          <h2>ÇORBALAR</h2>
+          <div class="menu-items">
+            <div class="menu-item">
+              <span class="item-name">DOMATES ÇORBASI</span>
+              <span class="dots"></span>
+              <span class="price">45 <small>TRY</small></span>
+            </div>
+            <div class="menu-item">
+              <span class="item-name">MERCIMEK ÇORBASI</span>
+              <span class="dots"></span>
+              <span class="price">40 <small>TRY</small></span>
+            </div>
+            <div class="menu-item">
+              <span class="item-name">MANTARLI KREMALΙ ÇORBA</span>
+              <span class="dots"></span>
+              <span class="price">50 <small>TRY</small></span>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-content">
+          <div class="contact-info">
+            <p>
+              <i class="fas fa-map-marker-alt"></i> Address: Your Cafe Address
+              Here
+            </p>
+            <p><i class="fas fa-phone"></i> Phone: +90 XXX XXX XX XX</p>
+            <p><i class="fas fa-clock"></i> Hours: 08:00 - 22:00</p>
+          </div>
+          <div class="social-media">
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -54,44 +54,35 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Add hover sound effect (optional)
-  const addHoverSound = () => {
-    const audioContext = new (window.AudioContext ||
-      window.webkitAudioContext)();
+  // Category filtering functionality
+  const filterButtons = document.querySelectorAll(".filter-btn");
+  const menuSectionsForFilter = document.querySelectorAll(".menu-section");
 
-    menuItems.forEach((item) => {
-      item.addEventListener("mouseenter", () => {
-        // Create a subtle hover sound
-        const oscillator = audioContext.createOscillator();
-        const gainNode = audioContext.createGain();
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      // Remove active class from all buttons
+      filterButtons.forEach((btn) => btn.classList.remove("active"));
+      // Add active class to clicked button
+      button.classList.add("active");
 
-        oscillator.connect(gainNode);
-        gainNode.connect(audioContext.destination);
+      const category = button.dataset.category;
 
-        oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
-        oscillator.frequency.exponentialRampToValueAtTime(
-          600,
-          audioContext.currentTime + 0.1
-        );
+      menuSectionsForFilter.forEach((section) => {
+        if (category === "all" || section.dataset.category === category) {
+          section.style.display = "block";
+          section.style.opacity = "0";
+          section.style.transform = "translateY(30px)";
 
-        gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-        gainNode.gain.linearRampToValueAtTime(
-          0.01,
-          audioContext.currentTime + 0.01
-        );
-        gainNode.gain.exponentialRampToValueAtTime(
-          0.001,
-          audioContext.currentTime + 0.1
-        );
-
-        oscillator.start(audioContext.currentTime);
-        oscillator.stop(audioContext.currentTime + 0.1);
+          setTimeout(() => {
+            section.style.opacity = "1";
+            section.style.transform = "translateY(0)";
+          }, 100);
+        } else {
+          section.style.display = "none";
+        }
       });
     });
-  };
-
-  // Enable hover sound on first user interaction
-  document.addEventListener("click", addHoverSound, { once: true });
+  });
 
   // Parallax effect for background
   window.addEventListener("scroll", () => {

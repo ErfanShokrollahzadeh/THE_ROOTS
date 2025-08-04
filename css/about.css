@@ -11,6 +11,9 @@ body {
   color: #2d2d2d;
   line-height: 1.6;
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .container {
@@ -18,6 +21,22 @@ body {
   margin: 0 auto;
   padding: 0 20px;
   position: relative;
+  width: 100%;
+}
+
+/* Smooth scrolling and performance optimizations */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Performance optimizations for mobile */
+* {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  perspective: 1000;
 }
 
 /* Navigation Bar */
@@ -31,6 +50,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
+  will-change: transform;
 }
 
 .nav-container {
@@ -1042,23 +1062,38 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  /* Disable animations on smaller screens for better performance */
+  * {
+    animation-duration: 0s !important;
+    transition-duration: 0.1s !important;
+  }
+
   .container {
-    padding: 15px;
+    padding: 10px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  body {
+    font-size: 16px; /* Prevent zoom on input focus */
   }
 
   .nav-links {
-    gap: 20px;
+    gap: 15px;
+    flex-wrap: wrap;
   }
 
   .nav-link {
-    font-size: 1rem;
-    padding: 10px 20px;
+    font-size: 0.95rem;
+    padding: 8px 16px;
+    white-space: nowrap;
   }
 
   .header-container {
     flex-direction: column;
-    gap: 40px;
+    gap: 30px;
     text-align: center;
+    padding: 20px 10px;
   }
 
   .brand-section {
@@ -1067,37 +1102,134 @@ body {
   }
 
   .brand-title {
-    font-size: 2.8rem;
-    margin-bottom: 12px;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    line-height: 1.2;
   }
 
   .brand-slogan {
-    font-size: 1.1rem;
-    margin-bottom: 15px;
+    font-size: 1rem;
+    margin-bottom: 12px;
   }
 
   .logo-circle {
-    width: 150px;
-    height: 150px;
+    width: 130px;
+    height: 130px;
+    margin: 0 auto;
   }
 
   .section-title {
-    font-size: 2rem;
+    font-size: 1.8rem;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
+    text-align: center;
   }
 
   .story-container,
   .location-container {
     grid-template-columns: 1fr;
-    gap: 40px;
-    padding: 0 20px;
+    gap: 30px;
+    padding: 0 15px;
+  }
+
+  .story-section,
+  .location-section,
+  .map-section,
+  .team-section,
+  .values-section {
+    margin: 40px 0;
+    padding: 30px 15px;
   }
 
   .values-grid,
   .team-grid {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 25px;
+    padding: 0 10px;
+  }
+
+  .value-card,
+  .team-member {
+    margin: 0 auto;
+    max-width: 350px;
+  }
+
+  .value-card {
+    padding: 25px 20px;
+  }
+
+  .contact-details {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .contact-item {
+    padding: 15px;
+    text-align: center;
+  }
+
+  .story-image img,
+  .location-image img {
+    height: 220px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .cta-section {
+    padding: 40px 15px;
+  }
+
+  .cta-title {
+    font-size: 2rem;
+    line-height: 1.3;
+  }
+
+  .cta-description {
+    font-size: 1rem;
+    margin-bottom: 25px;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+
+  .cta-btn {
+    width: 100%;
+    max-width: 280px;
+    padding: 15px 20px;
+    text-align: center;
+  }
+
+  /* Map Section Tablet */
+  .map-section {
+    padding: 40px 15px;
+    margin: 40px 0;
+  }
+
+  .map-info-overlay {
+    top: 15px;
+    right: 15px;
+  }
+
+  .map-location-card {
+    max-width: 250px;
+    padding: 15px;
+  }
+
+  .map-features {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    padding: 30px 15px 15px;
+    text-align: center;
+  }
+}
   }
 
   .cta-title {
@@ -1138,121 +1270,331 @@ body {
 }
 
 @media (max-width: 480px) {
+  /* Aggressive performance optimizations for small screens */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeSpeed;
+    will-change: auto;
+    animation-duration: 0s !important;
+    transition-duration: 0.1s !important;
+  }
+
+  body {
+    font-size: 16px; /* Prevent zoom on focus */
+    line-height: 1.5;
+    overflow-x: hidden;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
   .nav-container {
     padding: 12px 20px;
   }
 
   .nav-links {
-    gap: 15px;
+    gap: 10px;
     flex-wrap: wrap;
     justify-content: center;
   }
 
   .nav-link {
     font-size: 0.9rem;
-    padding: 8px 16px;
+    padding: 6px 12px;
+    border-radius: 15px;
+    min-width: auto;
+  }
+
+  .container {
+    padding: 5px;
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Reduce visual complexity */
+  .blur-bg::before {
+    backdrop-filter: none;
+    background: rgba(255, 255, 255, 0.95);
   }
 
   .header-container {
-    gap: 30px;
-    padding: 20px 15px;
+    gap: 20px;
+    padding: 15px 10px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .brand-section {
+    text-align: center;
+    max-width: 100%;
   }
 
   .brand-title {
-    font-size: 2.2rem;
-    letter-spacing: 2px;
+    font-size: 2rem;
+    letter-spacing: 1px;
+    line-height: 1.1;
+    margin-bottom: 8px;
   }
 
   .brand-slogan {
-    font-size: 1rem;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
   }
 
   .brand-subtitle {
-    font-size: 0.85rem;
-    padding: 10px 16px;
+    font-size: 0.8rem;
+    padding: 8px 12px;
   }
 
   .logo-circle {
-    width: 120px;
-    height: 120px;
+    width: 110px;
+    height: 110px;
+    margin: 0 auto;
   }
 
   .section-title {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
+    gap: 5px;
+    margin-bottom: 20px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .section-title i {
+    font-size: 1.2rem;
   }
 
   .story-section,
-  .team-section {
-    padding: 40px 20px;
-  }
-
+  .location-section,
+  .map-section,
+  .team-section,
   .values-section {
-    padding: 40px 20px;
+    margin: 30px 0;
+    padding: 20px 10px;
   }
 
-  .value-card {
-    padding: 30px 20px;
+  .story-container,
+  .location-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 5px;
   }
 
-  .cta-section {
-    padding: 60px 20px;
-  }
-
-  .cta-title {
-    font-size: 2rem;
-  }
-
-  .cta-description {
-    font-size: 1.1rem;
-  }
-
-  .member-image {
-    width: 150px;
-    height: 150px;
-  }
-
-  .contact-item {
-    padding: 15px;
+  .story-text,
+  .location-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    text-align: center;
   }
 
   .story-image img,
   .location-image img {
-    height: 250px;
+    height: 180px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 12px;
   }
 
-  /* Map Section Responsive */
+  .values-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 5px;
+  }
+
+  .value-card {
+    padding: 20px 15px;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .value-card i {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+
+  .value-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+  }
+
+  .value-card p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 5px;
+  }
+
+  .team-member {
+    max-width: 100%;
+    padding: 20px 15px;
+  }
+
+  .team-member h3 {
+    font-size: 1.1rem;
+  }
+
+  .team-member p {
+    font-size: 0.9rem;
+  }
+
+  .member-image {
+    width: 120px;
+    height: 120px;
+  }
+
+  .contact-details {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 0 5px;
+  }
+
+  .contact-item {
+    padding: 12px;
+    text-align: center;
+  }
+
+  .contact-item i {
+    font-size: 1.3rem;
+  }
+
+  .contact-item span {
+    font-size: 0.9rem;
+  }
+
+  /* Map Section Mobile */
   .map-section {
-    margin: 60px 0;
-    padding: 40px 20px;
+    padding: 20px 5px;
+    margin: 30px 0;
+  }
+
+  .map-container {
+    position: relative;
+    z-index: 2;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .map-wrapper {
+    border-radius: 12px;
+    margin-bottom: 20px;
+  }
+
+  .map-frame {
+    height: 300px;
   }
 
   .map-info-overlay {
     position: static;
-    margin-top: 20px;
+    margin-top: 15px;
+    top: auto;
+    right: auto;
+    left: auto;
   }
 
   .map-location-card {
     max-width: 100%;
-    padding: 20px;
+    padding: 15px;
+    margin: 0;
+    background: rgba(255, 255, 255, 0.95);
   }
 
-  .map-features {
-    grid-template-columns: 1fr;
-    gap: 15px;
+  .map-location-card h3 {
+    font-size: 1rem;
+    margin-bottom: 8px;
   }
 
-  .feature-item {
-    padding: 12px 15px;
+  .map-location-card p {
+    font-size: 0.85rem;
+    line-height: 1.4;
   }
 
   .location-actions {
     flex-direction: column;
     gap: 8px;
+    margin-top: 12px;
   }
 
   .directions-btn,
   .call-btn {
     padding: 10px 15px;
+    font-size: 0.85rem;
+  }
+
+  .map-features {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 15px;
+  }
+
+  .feature-item {
+    padding: 10px 12px;
+  }
+
+  .feature-item span {
+    font-size: 0.8rem;
+  }
+
+  .cta-section {
+    padding: 30px 10px;
+    margin: 30px 0;
+  }
+
+  .cta-title {
+    font-size: 1.6rem;
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+
+  .cta-description {
     font-size: 0.9rem;
+    margin-bottom: 20px;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .cta-btn {
+    padding: 12px 16px;
+    font-size: 0.9rem;
+    max-width: 250px;
+    width: 100%;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    padding: 20px 10px;
+    gap: 20px;
+    text-align: center;
+  }
+
+  .footer-section h3,
+  .footer-section h4 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+
+  .footer-section p,
+  .footer-section ul li a {
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  .social-icons {
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .social-icons a {
+    width: 40px;
+    height: 40px;
   }
 }

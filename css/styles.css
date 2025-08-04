@@ -582,6 +582,45 @@ body::before {
   border-radius: 2px;
 }
 
+/* Special styling for Compania Menu */
+.menu-section[data-category="compania"] {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 40px rgba(212, 175, 55, 0.1);
+}
+
+.menu-section[data-category="compania"] h2 {
+  color: #d4af37;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+.menu-section[data-category="compania"] h2::after {
+  background: linear-gradient(90deg, #d4af37, #f4d03f);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+.menu-section[data-category="compania"] .menu-item {
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.menu-section[data-category="compania"] .item-name {
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.menu-section[data-category="compania"] .price {
+  color: #d4af37;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.menu-section[data-category="compania"] .description {
+  color: #cccccc;
+}
+
+.menu-section[data-category="compania"] .dots {
+  border-bottom: 1px dotted rgba(212, 175, 55, 0.4);
+}
+
 .menu-items {
   display: flex;
   flex-direction: column;

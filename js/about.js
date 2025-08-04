@@ -79,21 +79,21 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Logo rotation on scroll
-  const logo = document.querySelector(".logo-circle");
-  let lastScrollY = window.scrollY;
+  // const logo = document.querySelector(".logo-circle");
+  // let lastScrollY = window.scrollY;
 
-  window.addEventListener("scroll", function () {
-    const currentScrollY = window.scrollY;
-    const scrollDiff = currentScrollY - lastScrollY;
+  // window.addEventListener("scroll", function () {
+  //   const currentScrollY = window.scrollY;
+  //   const scrollDiff = currentScrollY - lastScrollY;
 
-    if (logo) {
-      const currentRotation =
-        parseInt(logo.style.transform.replace(/[^\d-]/g, "")) || 0;
-      logo.style.transform = `rotate(${currentRotation + scrollDiff * 0.5}deg)`;
-    }
+  //   if (logo) {
+  //     const currentRotation =
+  //       parseInt(logo.style.transform.replace(/[^\d-]/g, "")) || 0;
+  //     logo.style.transform = `rotate(${currentRotation + scrollDiff * 0.5}deg)`;
+  //   }
 
-    lastScrollY = currentScrollY;
-  });
+  //   lastScrollY = currentScrollY;
+  // });
 
   // Contact item hover effects
   const contactItems = document.querySelectorAll(".contact-item");

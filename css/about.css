@@ -110,6 +110,8 @@ html {
 }
 
 .nav-link:hover::before {
+
+/* --- Mobile polish (About page) --- */
   left: 100%;
 }
 

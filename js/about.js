@@ -129,8 +129,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Add loading animation for images
-  const images = document.querySelectorAll("img");
+  // Add loading animation for images (exclude logo)
+  const images = document.querySelectorAll("img:not(.logo-image)");
   images.forEach((img) => {
     img.addEventListener("load", function () {
       this.style.opacity = "1";
@@ -142,6 +142,22 @@ document.addEventListener("DOMContentLoaded", function () {
     img.style.transform = "scale(0.8)";
     img.style.transition = "opacity 0.5s ease, transform 0.5s ease";
   });
+
+  // Special handling for logo image to ensure it's always visible
+  const logoImage = document.querySelector(".logo-image");
+  if (logoImage) {
+    logoImage.style.opacity = "1";
+    logoImage.style.transform = "scale(1)";
+    logoImage.style.transition = "all 0.3s ease";
+
+    // Add loading state for logo if it hasn't loaded yet
+    if (!logoImage.complete) {
+      logoImage.style.opacity = "0.3";
+      logoImage.addEventListener("load", function () {
+        this.style.opacity = "1";
+      });
+    }
+  }
 
   // CTA buttons enhanced interaction
   const ctaButtons = document.querySelectorAll(".cta-btn");

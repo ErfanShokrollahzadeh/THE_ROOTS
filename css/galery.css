@@ -1,3 +1,38 @@
+/* --- Extra-small devices tweaks (Gallery page) --- */
+@media screen and (max-width: 360px) {
+  .gallery-title {
+    font-size: 1.8rem;
+  }
+
+  .gallery-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .filter-btn {
+    width: 100%;
+    padding: 10px 12px;
+  }
+
+  .gallery-image {
+    height: 180px;
+  }
+
+  .lightbox-image {
+    height: 42vh;
+  }
+
+  .lightbox-prev,
+  .lightbox-next {
+    width: 40px;
+    height: 40px;
+    font-size: 0.95rem;
+  }
+
+  .back-to-top {
+    right: 12px;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+  }
+}
 /* Gallery Page Specific Styles */
 
 /* Gallery Header */

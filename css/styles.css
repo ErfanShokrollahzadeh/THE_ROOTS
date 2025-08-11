@@ -1,3 +1,36 @@
+/* --- Extra-small devices tweaks (Home page) --- */
+@media screen and (max-width: 360px) {
+  html {
+    font-size: 92%;
+  }
+
+  .nav-link {
+    font-size: 0.85rem;
+    padding: 8px 12px;
+  }
+
+  .brand-title {
+    font-size: 2rem;
+    letter-spacing: 1px;
+  }
+
+  .brand-subtitle {
+    font-size: 0.8rem;
+    padding: 8px 12px;
+  }
+
+  .item-image {
+    height: 100px;
+  }
+
+  .price {
+    font-size: 1rem;
+  }
+
+  .footer {
+    padding-bottom: calc(15px + env(safe-area-inset-bottom));
+  }
+}
 /* Reset and Base Styles */
 * {
   margin: 0;

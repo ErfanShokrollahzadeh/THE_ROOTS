@@ -1,3 +1,118 @@
+/* --- Mobile responsiveness (About page) --- */
+@media screen and (max-width: 600px) {
+  .nav-container {
+    padding: 12px 16px;
+  }
+  .nav-links {
+    gap: 16px;
+  }
+  .nav-link {
+    font-size: 1rem;
+    padding: 10px 16px;
+  }
+
+  .header {
+    padding: 28px 14px;
+    margin-bottom: 36px;
+  }
+  .header-container {
+    gap: 28px;
+  }
+  .logo-circle {
+    width: 140px;
+    height: 140px;
+  }
+  .brand-title {
+    font-size: 2.3rem;
+    letter-spacing: 2px;
+  }
+  .brand-slogan {
+    font-size: 1.05rem;
+  }
+  .brand-subtitle {
+    font-size: 0.9rem;
+    padding: 10px 14px;
+  }
+
+  .story-section,
+  .team-section,
+  .values-section,
+  .map-section,
+  .cta-section,
+  .location-section {
+    padding: 28px 16px;
+    margin-bottom: 36px;
+    border-radius: 18px;
+  }
+
+  .story-container,
+  .location-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0;
+  }
+  .story-image img {
+    height: 220px;
+  }
+  .location-image img {
+    height: 260px;
+  }
+
+  .values-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .value-card {
+    padding: 22px 18px;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .member-image {
+    width: 160px;
+    height: 160px;
+  }
+
+  .map-frame {
+    height: 280px;
+  }
+  .map-features {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .cta-title {
+    font-size: 2.1rem;
+  }
+  .cta-description {
+    font-size: 1rem;
+  }
+  .cta-buttons {
+    gap: 14px;
+  }
+  .cta-btn {
+    padding: 12px 18px;
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .brand-title {
+    font-size: 2rem;
+  }
+  .nav-links {
+    gap: 10px;
+  }
+  .member-image {
+    width: 140px;
+    height: 140px;
+  }
+  .map-features {
+    grid-template-columns: 1fr;
+  }
+}
 /* Reset and Base Styles */
 * {
   margin: 0;

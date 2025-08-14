@@ -927,6 +927,12 @@ body::before {
   padding-bottom: 15px;
 }
 
+/* Reserve space on the right for the collapse button */
+.menu-section.collapsible-ready > h2 { padding-right: 60px; }
+@media (max-width: 600px) { .menu-section.collapsible-ready > h2 { padding-right: 54px; font-size: 1.4rem; } }
+@media (max-width: 420px) { .menu-section.collapsible-ready > h2 { padding-right: 50px; font-size: 1.25rem; } }
+@media (max-width: 340px) { .menu-section.collapsible-ready > h2 { padding-right: 46px; font-size: 1.15rem; } }
+
 .menu-section h2::after {
   content: "";
   position: absolute;
@@ -937,6 +943,48 @@ body::before {
   height: 3px;
   background: linear-gradient(90deg, #d4af37, #f4d03f);
   border-radius: 2px;
+}
+
+/* Collapsible (dropdown) behavior */
+.menu-section { --collapse-duration: .35s; }
+.menu-section .collapse-toggle {
+  background: rgba(212,175,55,0.12);
+  border: 1px solid rgba(212,175,55,0.4);
+  color: #6d5635;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  cursor: pointer;
+  position: absolute;
+  right: 10px; top: 50%; transform: translateY(-50%);
+  backdrop-filter: blur(4px);
+  transition: background .3s ease, transform .4s ease;
+}
+.menu-section .collapse-toggle svg { transition: transform .4s ease; }
+@media (max-width:600px){ .menu-section .collapse-toggle { width:30px;height:30px; right:8px; } }
+@media (max-width:420px){ .menu-section .collapse-toggle { width:28px;height:28px; right:6px; } }
+@media (max-width:340px){ .menu-section .collapse-toggle { width:26px;height:26px; right:4px; } }
+.menu-section .collapse-toggle:hover { background: rgba(212,175,55,0.25); }
+.menu-section .collapse-toggle[aria-expanded="false"] svg { transform: rotate(-90deg); transition: transform .4s ease; }
+.menu-section .collapse-toggle[aria-expanded="true"] svg { transform: rotate(0deg); transition: transform .4s ease; }
+
+.collapsible-body {
+  overflow: hidden;
+  --target-height: auto;
+  max-height: var(--target-height, 0px);
+  transition: max-height var(--collapse-duration) ease, padding var(--collapse-duration) ease;
+}
+.menu-section:not(.expanded) .collapsible-body { max-height: 0 !important; padding-top: 0; }
+.menu-section.expanded .collapsible-body { max-height: var(--target-height); }
+
+/* Visually hidden utility */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
 }
 
 /* Special styling for Compania Menu (pure black variant) */

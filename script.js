@@ -40,6 +40,60 @@ document.addEventListener("DOMContentLoaded", function () {
   const filterButtons = document.querySelectorAll(".filter-btn");
   const menuSectionsForFilter = document.querySelectorAll(".menu-section");
 
+  // Prepare collapsible structure: wrap items list with a content container if not already
+  menuSectionsForFilter.forEach((section) => {
+    if (!section.classList.contains("collapsible-ready")) {
+      const itemsWrapper = section.querySelector(".menu-items");
+      if (itemsWrapper) {
+        itemsWrapper.classList.add("collapsible-body");
+        const h2 = section.querySelector("h2");
+        if (h2 && !h2.querySelector(".collapse-toggle")) {
+          const toggleBtn = document.createElement("button");
+          toggleBtn.type = "button";
+          toggleBtn.className = "collapse-toggle";
+          // Start collapsed on page load
+          toggleBtn.setAttribute("aria-expanded", "false");
+          toggleBtn.innerHTML =
+            '<span class="visually-hidden">Toggle section</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>';
+          h2.appendChild(toggleBtn);
+        }
+        // Pre-measure height for smooth first expansion
+        const setHeight = () => {
+          itemsWrapper.style.setProperty(
+            "--target-height",
+            itemsWrapper.scrollHeight + "px"
+          );
+        };
+        requestAnimationFrame(setHeight);
+        if (window.ResizeObserver) {
+          const ro = new ResizeObserver(() => {
+            if (section.classList.contains("expanded")) setHeight();
+          });
+          ro.observe(itemsWrapper);
+        }
+        itemsWrapper.querySelectorAll("img").forEach((img) => {
+          if (!img.complete) {
+            img.addEventListener(
+              "load",
+              () => {
+                if (section.classList.contains("expanded")) setHeight();
+              },
+              { once: true }
+            );
+          }
+        });
+        // Ensure collapsed visual state
+        itemsWrapper.style.setProperty(
+          "--target-height",
+          itemsWrapper.scrollHeight + "px"
+        );
+      }
+      section.classList.add("collapsible-ready"); // intentionally NOT adding 'expanded'
+    }
+    // Remove any accidental 'expanded' class that might come from SSR/caching
+    section.classList.remove("expanded");
+  });
+
   filterButtons.forEach((button) => {
     button.addEventListener("click", () => {
       // Remove active class and aria-pressed from all buttons
@@ -52,30 +106,43 @@ document.addEventListener("DOMContentLoaded", function () {
       button.classList.add("active");
       button.setAttribute("aria-pressed", "true");
 
-      const category = button.dataset.category;
+      const category = (button.dataset.category || "").toLowerCase();
 
       // Add loading state
       button.style.pointerEvents = "none";
 
-      menuSectionsForFilter.forEach((section, index) => {
-        if (category === "all" || section.dataset.category === category) {
+      menuSectionsForFilter.forEach((section) => {
+        // Normalize dataset values to lowercase for comparison
+        const sectionCat = (section.dataset.category || "").toLowerCase();
+        const isMatch = category === "all" || sectionCat === category;
+        if (isMatch) {
           section.style.display = "block";
-          section.style.opacity = "0";
-          section.style.transform = "translateY(30px)";
-
-          setTimeout(() => {
-            section.style.opacity = "1";
-            section.style.transform = "translateY(0)";
-          }, 100 + index * 50); // Staggered animation
+          requestAnimationFrame(() => {
+            section.classList.add("expanded");
+            const body = section.querySelector(".collapsible-body");
+            if (body) {
+              body.style.setProperty(
+                "--target-height",
+                body.scrollHeight + "px"
+              );
+            }
+          });
         } else {
-          section.style.opacity = "0";
-          section.style.transform = "translateY(-20px)";
-
+          section.classList.remove("expanded");
+          // Wait for collapse transition then hide
           setTimeout(() => {
             section.style.display = "none";
-          }, 300);
+          }, 350);
         }
       });
+      // Recalc heights after animations finish
+      setTimeout(() => {
+        document
+          .querySelectorAll(".menu-section.expanded .collapsible-body")
+          .forEach((body) => {
+            body.style.setProperty("--target-height", body.scrollHeight + "px");
+          });
+      }, 400);
 
       // Remove loading state
       setTimeout(() => {
@@ -92,13 +159,33 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Parallax effect for background
-  window.addEventListener("scroll", () => {
-    const scrolled = window.pageYOffset;
-    const rate = scrolled * -0.5;
-
-    document.body.style.backgroundPosition = `center ${rate}px`;
+  // Delegate clicks for collapse toggles (individual expand/collapse)
+  document.addEventListener("click", (e) => {
+    const toggle = e.target.closest(".collapse-toggle");
+    if (toggle) {
+      const section = toggle.closest(".menu-section");
+      const body = section?.querySelector(".collapsible-body");
+      if (section && body) {
+        const willExpand = !section.classList.contains("expanded");
+        if (willExpand) {
+          section.classList.add("expanded");
+          toggle.setAttribute("aria-expanded", "true");
+          body.style.setProperty("--target-height", body.scrollHeight + "px");
+        } else {
+          toggle.setAttribute("aria-expanded", "false");
+          // set current height then on next frame set to 0 for smooth collapse
+          body.style.setProperty("--target-height", body.scrollHeight + "px");
+          requestAnimationFrame(() => {
+            section.classList.remove("expanded");
+            body.style.setProperty("--target-height", "0px");
+          });
+        }
+      }
+    }
   });
+
+  // Parallax effect for background
+  // Removed parallax to avoid layout shifts affecting collapsible heights
 
   // Logo rotation effect
   const logo = document.querySelector(".logo-circle");

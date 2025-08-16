@@ -978,6 +978,63 @@ body::before {
 .menu-section:not(.expanded) .collapsible-body { max-height: 0 !important; padding-top: 0; }
 .menu-section.expanded .collapsible-body { max-height: var(--target-height); }
 
+/* Menu main header styling */
+.menu-header {
+  text-align: center;
+  margin: 70px auto 40px;
+  position: relative;
+  max-width: 820px;
+  padding: 10px 20px 25px;
+}
+.menu-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.4rem, 6vw, 3.6rem);
+  line-height: 1.1;
+  letter-spacing: 3px;
+  background: linear-gradient(90deg, #b48b1c, #d4af37 35%, #f4d03f 65%, #c89d24);
+  -webkit-background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 4px 14px rgba(212,175,55,0.25));
+  animation: menuTitleEnter .9s ease-out forwards, menuTitleSheen 6s linear infinite;
+  position: relative;
+}
+.menu-header::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  transform: translateX(-50%);
+  width: 160px;
+  height: 5px;
+  background: linear-gradient(90deg,#d4af37,#f4d03f,#d4af37);
+  border-radius: 4px;
+  box-shadow: 0 0 0 0 rgba(212,175,55,0.5), 0 0 18px rgba(212,175,55,0.5);
+  animation: menuBarPulse 3.2s ease-in-out infinite;
+}
+@keyframes menuTitleEnter {
+  0% { opacity: 0; transform: translateY(25px) scale(.94); letter-spacing: 8px; }
+  60% { opacity: 1; }
+  100% { opacity: 1; transform: translateY(0) scale(1); letter-spacing: 3px; }
+}
+@keyframes menuBarPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(212,175,55,0.35), 0 0 14px rgba(212,175,55,0.55); }
+  50% { box-shadow: 0 0 12px 4px rgba(212,175,55,0.45), 0 0 26px rgba(212,175,55,0.85); }
+}
+@keyframes menuTitleSheen {
+  0%, 12%, 100% { background-position: -180% 0; }
+  60% { background-position: 180% 0; }
+}
+@media (max-width: 640px) {
+  .menu-header { margin: 55px auto 30px; }
+  .menu-header h1 { letter-spacing: 2px; }
+  .menu-header::after { width: 120px; height: 4px; }
+}
+@media (max-width: 420px) {
+  .menu-header { margin: 45px auto 28px; padding-bottom: 18px; }
+  .menu-header h1 { font-size: clamp(2.1rem, 9vw, 2.8rem); letter-spacing: 1.5px; }
+  .menu-header::after { width: 100px; }
+}
+
 /* Visually hidden utility */
 .visually-hidden {
   position: absolute !important;

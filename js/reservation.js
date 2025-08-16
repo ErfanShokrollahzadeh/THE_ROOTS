@@ -1,3 +1,4 @@
+// http://localhost:4000/api/reservations?date=YYYY-MM-DD
 // Server-backed reservation system
 const TOTAL_TABLES = 50;
 const API_BASE =

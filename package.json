@@ -1,0 +1,17 @@
+{
+  "name": "the_roots_reservation_notifications",
+  "version": "1.0.0",
+  "description": "Notification backend (SMS & Email) for The Roots Cafe reservations",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "NODE_ENV=development nodemon server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "nodemailer": "^6.9.13"
+  }
+}

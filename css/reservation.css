@@ -1,0 +1,212 @@
+/* Reservation specific overrides */
+.reservation-hero {
+  text-align: center;
+  padding: 70px 20px 40px;
+}
+.reservation-hero h1 {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2.4rem, 5vw, 3.5rem);
+  letter-spacing: 3px;
+  background: linear-gradient(135deg, #8b7355, #6d5635);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 15px;
+}
+.reservation-hero p {
+  font-size: 1.1rem;
+  max-width: 720px;
+  margin: 0 auto;
+  color: #5d4e37;
+}
+
+.reservation-wrapper {
+  max-width: 1000px;
+  margin: 0 auto 80px;
+  padding: 50px 40px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(15px);
+  border-radius: 30px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+  position: relative;
+  overflow: hidden;
+}
+.reservation-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+      circle at 30% 20%,
+      rgba(212, 175, 55, 0.18),
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at 70% 80%,
+      rgba(139, 115, 85, 0.15),
+      transparent 65%
+    );
+  pointer-events: none;
+}
+
+.capacity-banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  background: linear-gradient(135deg, #8b7355, #6d5635);
+  color: #f5f1eb;
+  padding: 14px 22px;
+  border-radius: 18px;
+  margin: 0px auto 40px;
+  max-width: 480px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  position: relative;
+  z-index: 2;
+}
+.capacity-banner i {
+  font-size: 1.3rem;
+}
+
+form.reservation-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 28px 30px;
+  position: relative;
+  z-index: 2;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.form-group label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  color: #5d4e37;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 14px 16px;
+  border: 1px solid rgba(139, 115, 85, 0.35);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.9);
+  font: inherit;
+  resize: vertical;
+  min-height: 52px;
+  transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #d4af37;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.35);
+  background: #fff;
+}
+
+.inline-note {
+  font-size: 0.75rem;
+  color: #866c48;
+  letter-spacing: 0.5px;
+}
+.full-span {
+  grid-column: 1 / -1;
+}
+
+.submit-area {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+.reserve-btn {
+  background: linear-gradient(135deg, #d4af37, #f4d03f);
+  color: #3d2f14;
+  padding: 16px 42px;
+  border: none;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  cursor: pointer;
+  letter-spacing: 1px;
+  box-shadow: 0 10px 26px rgba(212, 175, 55, 0.4);
+  transition: all 0.35s;
+  position: relative;
+  overflow: hidden;
+}
+.reserve-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 38px rgba(212, 175, 55, 0.55);
+}
+.reserve-btn:active {
+  transform: translateY(0);
+}
+
+.status-message {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #5d4e37;
+  min-height: 24px;
+}
+.status-message.error {
+  color: #a62828;
+}
+.status-message.success {
+  color: #1d6d3d;
+}
+
+.tables-visual {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 6px;
+  grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+  margin-top: 10px;
+}
+.table-slot {
+  aspect-ratio: 1/1;
+  border-radius: 10px;
+  font-size: 0.65rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  background: linear-gradient(135deg, #faf7f2, #efe6d8);
+  color: #6d5635;
+  border: 1px solid rgba(139, 115, 85, 0.35);
+  position: relative;
+  overflow: hidden;
+}
+.table-slot.booked {
+  background: linear-gradient(135deg, #8b7355, #6d5635);
+  color: #f5f1eb;
+}
+.table-slot.selected {
+  outline: 3px solid #d4af37;
+}
+
+@media (max-width: 680px) {
+  .reservation-wrapper {
+    padding: 46px 24px 50px;
+  }
+  form.reservation-form {
+    gap: 22px 18px;
+  }
+  .capacity-banner {
+    margin: 0px auto 34px;
+  }
+}
+@media (max-width: 460px) {
+  .reserve-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .capacity-banner {
+    flex-direction: column;
+    text-align: center;
+  }
+}

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Make a Reservation - The Roots Cafe</title>
+    <link rel="stylesheet" href="css/about.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/reservation.css" />
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-links">
+            <a href="index.html" class="nav-link">Menu</a>
+            <a href="Gallery.html" class="nav-link">Gallery</a>
+            <a href="about.html" class="nav-link">About Us</a>
+            <!-- <a href="reservation.html" class="nav-link active">Reservation</a> -->
+          </div>
+        </div>
+      </nav>
+
+      <section class="reservation-hero">
+        <h1>Reserve Your Table</h1>
+        <p>
+          Secure your spot at The Roots Cafe. We currently offer
+          <strong>50 tables</strong>. Choose your preferred date, time, and
+          party size— we'll confirm instantly if available.
+        </p>
+      </section>
+
+      <div class="reservation-wrapper">
+        <div class="capacity-banner">
+          <i class="fas fa-chair"></i
+          ><span
+            ><strong>Capacity:</strong>
+            <span id="capacity-count">50</span> Tables •
+            <span id="booked-count">0</span> Booked •
+            <span id="available-count">50</span> Available</span
+          >
+        </div>
+        <form class="reservation-form" id="reservationForm" novalidate>
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              required
+              placeholder="Your name"
+            />
+          </div>
+          <!-- Phone field removed: email only notifications -->
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="you@example.com"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="date">Date</label>
+            <input id="date" name="date" type="date" required />
+          </div>
+          <div class="form-group">
+            <label for="time">Time</label>
+            <select id="time" name="time" required>
+              <option value="">Select...</option>
+              <option>10:00</option>
+              <option>11:00</option>
+              <option>12:00</option>
+              <option>13:00</option>
+              <option>14:00</option>
+              <option>15:00</option>
+              <option>16:00</option>
+              <option>17:00</option>
+              <option>18:00</option>
+              <option>19:00</option>
+              <option>20:00</option>
+              <option>21:00</option>
+              <option>22:00</option>
+              <option>23:00</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="guests">Guests</label>
+            <select id="guests" name="guests" required>
+              <option value="">Select...</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="tableNumber">Table (auto or choose)</label>
+            <select id="tableNumber" name="tableNumber">
+              <option value="">Auto-Assign</option>
+            </select>
+            <span class="inline-note"
+              >Green = free, Dark = booked. Click below grid to choose.</span
+            >
+          </div>
+          <div class="form-group full-span">
+            <label for="notes">Special Requests</label>
+            <textarea
+              id="notes"
+              name="notes"
+              rows="3"
+              placeholder="Allergies, celebration, etc."
+            ></textarea>
+          </div>
+          <div
+            class="tables-visual"
+            id="tablesVisual"
+            aria-label="Table availability grid"
+          ></div>
+          <div class="submit-area">
+            <button type="submit" class="reserve-btn">
+              <i class="fas fa-calendar-check"></i> Reserve Table
+            </button>
+            <div
+              class="status-message"
+              id="statusMessage"
+              role="status"
+              aria-live="polite"
+            ></div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="js/reservation.js"></script>
+    <script>
+      // Minimal client test email helper (toggleable with hash #testmail)
+      if (location.hash === "#testmail") {
+        const panel = document.createElement("div");
+        panel.style.cssText =
+          "position:fixed;bottom:12px;left:12px;padding:10px 14px;background:#fff;border:1px solid #ccc;border-radius:8px;font:12px/1.3 sans-serif;z-index:9999;box-shadow:0 4px 12px rgba(0,0,0,.12)";
+        panel.innerHTML =
+          '<strong>Send Test Email</strong><br><input id="testEmailInput" type="email" placeholder="you@example.com" style="margin:6px 0;padding:4px 8px;width:180px"> <button id="sendTestEmailBtn" style="padding:4px 10px;cursor:pointer">Send</button><div id="testEmailStatus" style="margin-top:6px;min-height:16px"></div>';
+        document.body.appendChild(panel);
+        panel
+          .querySelector("#sendTestEmailBtn")
+          .addEventListener("click", () => {
+            const email = panel.querySelector("#testEmailInput").value.trim();
+            const st = panel.querySelector("#testEmailStatus");
+            if (!email) {
+              st.textContent = "Enter email";
+              st.style.color = "red";
+              return;
+            }
+            st.textContent = "Sending...";
+            st.style.color = "#333";
+            fetch(
+              (window.RESERVATION_API_BASE || "http://localhost:4000") +
+                "/api/test-email",
+              {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email }),
+              }
+            )
+              .then((r) => r.json())
+              .then((j) => {
+                if (j.ok) {
+                  st.innerHTML =
+                    "Sent! " +
+                    (j.preview
+                      ? '<a href="' +
+                        j.preview +
+                        '" target="_blank">Preview</a>'
+                      : "");
+                  st.style.color = "green";
+                } else {
+                  throw new Error(j.error || "Failed");
+                }
+              })
+              .catch((e) => {
+                st.textContent = e.message;
+                st.style.color = "red";
+              });
+          });
+      }
+    </script>
+  </body>
+</html>

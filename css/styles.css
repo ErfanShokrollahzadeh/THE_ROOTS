@@ -929,9 +929,9 @@ body::before {
 
 /* Reserve space on the right for the collapse button */
 .menu-section.collapsible-ready > h2 { padding-right: 60px; }
-@media (max-width: 600px) { .menu-section.collapsible-ready > h2 { padding-right: 54px; font-size: 1.4rem; } }
-@media (max-width: 420px) { .menu-section.collapsible-ready > h2 { padding-right: 50px; font-size: 1.25rem; } }
-@media (max-width: 340px) { .menu-section.collapsible-ready > h2 { padding-right: 46px; font-size: 1.15rem; } }
+@media (max-width: 600px) { .menu-section.collapsible-ready > h2 { padding-right: 5px; font-size: 1.4rem; } }
+@media (max-width: 420px) { .menu-section.collapsible-ready > h2 { padding-right: 5px; font-size: 1.25rem; } }
+@media (max-width: 340px) { .menu-section.collapsible-ready > h2 { padding-right: 5px; font-size: 1.15rem; } }
 
 .menu-section h2::after {
   content: "";

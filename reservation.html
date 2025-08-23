@@ -16,6 +16,9 @@
     <link rel="stylesheet" href="css/reservation.css" />
   </head>
   <body>
+    <!-- Optional: Simple email mode (no backend) using EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="js/config.js"></script>
     <div class="container">
       <nav class="navbar">
         <div class="nav-container">
@@ -152,7 +155,7 @@
             aria-label="Table availability grid"
           ></div>
           <div class="submit-area">
-            <button type="#" class="reserve-btn">
+            <button type="submit" class="reserve-btn">
               <i class="fas fa-calendar-check"></i> Reserve Table
             </button>
             <div

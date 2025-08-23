@@ -119,12 +119,22 @@ async function sendNotifications(resv) {
   const ownerText = `Table ${tableNumber} reserved ${date} ${time} for ${guests} guest(s). Name: ${name}${
     email ? " | " + email : ""
   }${notes ? "\nNotes: " + notes : ""}`;
-  const userText = `Your table ${tableNumber} at ${time} on ${date} is reserved for ${guests} guest(s).`;
+  // Build friendly date parts for user email
+  const dt = new Date(`${date}T${time}:00`);
+  const wk = dt.toLocaleDateString("en-US", { weekday: "long" });
+  const mon = dt.toLocaleDateString("en-US", { month: "long" });
+  const d = dt.getDate();
+  const t12 = dt.toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+  });
+  const userText = `Your reservation has been taken on ${wk} ${mon} ${d} at ${t12}.`;
   const results = { ownerEmail: null, userEmail: null };
   try {
+    const fromAddress = process.env.EMAIL_USER || "no-reply@theroots.example";
     if (mailTransporter && process.env.OWNER_EMAIL) {
       const info = await mailTransporter.sendMail({
-        from: `The Roots Cafe <${process.env.EMAIL_USER}>`,
+        from: `The Roots Cafe <${fromAddress}>`,
         to: process.env.OWNER_EMAIL,
         subject: `Reservation Table ${tableNumber} ${date} ${time}`,
         text: ownerText,
@@ -137,11 +147,11 @@ async function sendNotifications(resv) {
     }
     if (mailTransporter && email) {
       const userInfo = await mailTransporter.sendMail({
-        from: `The Roots Cafe <${process.env.EMAIL_USER}>`,
+        from: `The Roots Cafe <${fromAddress}>`,
         to: email,
-        subject: `Reservation Confirmed - Table ${tableNumber}`,
-        text: `Hello ${name},\n${userText}`,
-        html: `Hello ${name},<br/>${userText}`,
+        subject: `Reservation Confirmation`,
+        text: `${userText}`,
+        html: `${userText}`,
       });
       results.userEmail = userInfo.messageId;
       if (

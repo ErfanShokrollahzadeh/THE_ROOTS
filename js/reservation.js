@@ -1,14 +1,21 @@
 // http://localhost:4000/api/reservations?date=YYYY-MM-DD
 // Server-backed reservation system
 const TOTAL_TABLES = 50;
+const SIMPLE_MODE = !!window.USE_SIMPLE_EMAIL;
 const API_BASE =
   window.RESERVATION_API_BASE ||
   (location.port === "4000" ? "" : "http://localhost:4000");
 let currentBooked = new Set(); // booked tables for currently selected slot
 let lastDate = null;
 let lastTime = null;
+let SERVER_AVAILABLE = true; // once a fetch fails, stop further attempts
 async function fetchAvailability(date, time) {
   if (!date || !time) return;
+  if (SIMPLE_MODE || !SERVER_AVAILABLE) {
+    // In simple mode or if backend is down, assume no live bookings
+    currentBooked = new Set();
+    return;
+  }
   lastDate = date;
   lastTime = time;
   try {
@@ -23,7 +30,14 @@ async function fetchAvailability(date, time) {
     currentBooked =
       js.ok && Array.isArray(js.booked) ? new Set(js.booked) : new Set();
   } catch (e) {
-    console.warn("Failed to load availability", e.message || e);
+    if (SERVER_AVAILABLE) {
+      // Only log this once to avoid noise
+      console.info(
+        "Backend not reachable; continuing without live availability.",
+        e && e.message ? e.message : e
+      );
+    }
+    SERVER_AVAILABLE = false;
     currentBooked = new Set();
   }
 }
@@ -186,7 +200,111 @@ function handleReservationSubmit(e) {
     data.tableNumber = assigned;
   }
 
-  // Submit to server
+  // If simple email mode is enabled, send a confirmation email client-side and skip backend
+  if (window.USE_SIMPLE_EMAIL && window.emailjs && window.EMAILJS_PUBLIC_KEY) {
+    try {
+      window.emailjs.init({ publicKey: window.EMAILJS_PUBLIC_KEY });
+      const dt = new Date(`${data.date}T${data.time}:00`);
+      const wk = dt.toLocaleDateString("en-US", { weekday: "long" });
+      const mon = dt.toLocaleDateString("en-US", { month: "long" });
+      const d = dt.getDate();
+      const t12 = dt.toLocaleTimeString("en-US", {
+        hour: "numeric",
+        minute: "2-digit",
+      });
+      const message = `Your reservation has been taken on ${wk} ${mon} ${d} at ${t12}.`;
+
+      const params = {
+        to_email: data.email,
+        message,
+      };
+      window.emailjs
+        .send(window.EMAILJS_SERVICE_ID, window.EMAILJS_TEMPLATE_ID, params)
+        .then(() => {
+          const confirmation = `Confirmation email sent. ${message}`;
+          statusEl.textContent = confirmation;
+          statusEl.classList.add("success");
+          showToast(confirmation, "success");
+          // Locally mark chosen table as booked for this view only
+          currentBooked.add(Number(data.tableNumber));
+          refreshAvailability();
+        })
+        .catch((e) => {
+          const msg = e && e.text ? e.text : (e && e.message) || "Email failed";
+          statusEl.textContent = msg;
+          statusEl.classList.add("error");
+          showToast(msg, "error");
+          refreshAvailability();
+        });
+    } catch (e) {
+      statusEl.textContent = e.message || "Email failed";
+      statusEl.classList.add("error");
+      showToast(statusEl.textContent, "error");
+      refreshAvailability();
+    }
+    // Keep date/time
+    form.date.value = data.date;
+    form.time.value = data.time;
+    return;
+  }
+
+  // Default: submit to backend
+  if (!SIMPLE_MODE && !SERVER_AVAILABLE) {
+    // Backend not reachable; attempt client email if configured, else guide user
+    if (
+      window.emailjs &&
+      window.EMAILJS_PUBLIC_KEY &&
+      window.EMAILJS_SERVICE_ID &&
+      window.EMAILJS_TEMPLATE_ID
+    ) {
+      try {
+        window.emailjs.init({ publicKey: window.EMAILJS_PUBLIC_KEY });
+        const dt = new Date(`${data.date}T${data.time}:00`);
+        const wk = dt.toLocaleDateString("en-US", { weekday: "long" });
+        const mon = dt.toLocaleDateString("en-US", { month: "long" });
+        const d = dt.getDate();
+        const t12 = dt.toLocaleTimeString("en-US", {
+          hour: "numeric",
+          minute: "2-digit",
+        });
+        const message = `Your reservation has been taken on ${wk} ${mon} ${d} at ${t12}.`;
+        const params = { to_email: data.email, message };
+        window.emailjs
+          .send(window.EMAILJS_SERVICE_ID, window.EMAILJS_TEMPLATE_ID, params)
+          .then(() => {
+            const confirmation = `Confirmation email sent. ${message}`;
+            statusEl.textContent = confirmation;
+            statusEl.classList.add("success");
+            showToast(confirmation, "success");
+            currentBooked.add(Number(data.tableNumber));
+            refreshAvailability();
+          })
+          .catch((e) => {
+            const msg =
+              e && e.text ? e.text : (e && e.message) || "Email failed";
+            statusEl.textContent = msg;
+            statusEl.classList.add("error");
+            showToast(msg, "error");
+            refreshAvailability();
+          });
+      } catch (e) {
+        statusEl.textContent = e.message || "Email failed";
+        statusEl.classList.add("error");
+        showToast(statusEl.textContent, "error");
+        refreshAvailability();
+      }
+    } else {
+      const msg =
+        "Reservation server is not running. Enable simple email in js/config.js or start the server on :4000.";
+      statusEl.textContent = msg;
+      statusEl.classList.add("error");
+      showToast(msg, "error");
+    }
+    form.date.value = data.date;
+    form.time.value = data.time;
+    return;
+  }
+
   const postUrl = `${API_BASE}/api/reservations`;
   fetch(postUrl, {
     method: "POST",
@@ -194,9 +312,7 @@ function handleReservationSubmit(e) {
     body: JSON.stringify(data),
   })
     .then(async (r) => {
-      // First attempt
       if (r.status === 405 && !API_BASE.includes("localhost:4000")) {
-        // Retry to backend on port 4000
         const rr = await fetch("http://localhost:4000/api/reservations", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -220,17 +336,78 @@ function handleReservationSubmit(e) {
       const tbl =
         (payload.reservation && payload.reservation.tableNumber) ||
         data.tableNumber;
-      const confirmation = `Your table has been reserved. Table ${tbl} for ${data.guests} guest(s) at ${data.time}.`;
-      statusEl.textContent = confirmation;
+      let confirmation = `Your table has been reserved. Table ${tbl} for ${data.guests} guest(s) at ${data.time}.`;
+      if (payload && payload.notify && payload.notify.userPreview) {
+        confirmation += ` `;
+        const link = document.createElement("a");
+        link.href = payload.notify.userPreview;
+        link.target = "_blank";
+        link.rel = "noopener";
+        link.textContent = "Preview Email";
+        statusEl.textContent = confirmation;
+        statusEl.appendChild(document.createTextNode(" "));
+        statusEl.appendChild(link);
+      } else {
+        statusEl.textContent = confirmation;
+      }
       statusEl.classList.add("success");
-      showToast(confirmation, "success");
+      showToast("Reservation confirmed", "success");
       refreshAvailability();
     })
     .catch((err) => {
-      statusEl.textContent = err.message;
-      statusEl.classList.add("error");
-      showToast(err.message, "error");
-      refreshAvailability();
+      // Network error fallback
+      SERVER_AVAILABLE = false;
+      if (
+        window.emailjs &&
+        window.EMAILJS_PUBLIC_KEY &&
+        window.EMAILJS_SERVICE_ID &&
+        window.EMAILJS_TEMPLATE_ID
+      ) {
+        try {
+          window.emailjs.init({ publicKey: window.EMAILJS_PUBLIC_KEY });
+          const dt = new Date(`${data.date}T${data.time}:00`);
+          const wk = dt.toLocaleDateString("en-US", { weekday: "long" });
+          const mon = dt.toLocaleDateString("en-US", { month: "long" });
+          const d = dt.getDate();
+          const t12 = dt.toLocaleTimeString("en-US", {
+            hour: "numeric",
+            minute: "2-digit",
+          });
+          const message = `Your reservation has been taken on ${wk} ${mon} ${d} at ${t12}.`;
+          const params = { to_email: data.email, message };
+          window.emailjs
+            .send(window.EMAILJS_SERVICE_ID, window.EMAILJS_TEMPLATE_ID, params)
+            .then(() => {
+              const confirmation = `Confirmation email sent. ${message}`;
+              statusEl.textContent = confirmation;
+              statusEl.classList.add("success");
+              showToast(confirmation, "success");
+              currentBooked.add(Number(data.tableNumber));
+              refreshAvailability();
+            })
+            .catch((e) => {
+              const msg =
+                e && e.text ? e.text : (e && e.message) || "Email failed";
+              statusEl.textContent = msg;
+              statusEl.classList.add("error");
+              showToast(msg, "error");
+              refreshAvailability();
+            });
+        } catch (e) {
+          statusEl.textContent = e.message || (err && err.message) || "Failed";
+          statusEl.classList.add("error");
+          showToast(statusEl.textContent, "error");
+          refreshAvailability();
+        }
+      } else {
+        const msg = (err && err.message) || "Network error";
+        statusEl.textContent =
+          msg +
+          "; enable simple email in js/config.js or start server on :4000.";
+        statusEl.classList.add("error");
+        showToast(statusEl.textContent, "error");
+        refreshAvailability();
+      }
     });
   form.reset();
   // Keep date/time
